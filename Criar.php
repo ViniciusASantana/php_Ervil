@@ -2,7 +2,6 @@
 $titulo = "Membros";
 $comunidade = "IFSP";
 $imagem= "imagens/logo1.jpg";
-// um exemplo de trabalhar com arquivos externos 
 include 'fragmentos/cabecalho.php';
 include 'fragmentos/menuResponsivo.php';
 
