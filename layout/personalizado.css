@@ -1,0 +1,112 @@
+
+/* estilo pelo nome da tag */
+body{
+    margin-bottom: 20px;
+}
+
+#entrar{
+    margin-left: 1550px;
+}
+
+#Logado{
+    margin-left: 1510px;
+}
+
+#disney{
+    margin-left: 93.4%;
+}
+#confirmar{
+    margin-left: 89%;
+}
+#ferramentas{
+    margin-left: 94%;
+}
+.mt-n{
+    margin-top: 3vw;
+}
+.list-group-item{
+    height: 13vw;
+    margin: 0 px;
+}
+
+.border{
+    border-radius: 2px;
+    background-color: white;
+}
+.menuflex{
+    display: flex;
+}
+
+.menu{
+    display: flex;
+    background-color: #939597;
+}
+.corpo{
+    padding: 20px;
+    background-color: whitesmoke;
+    border-radius: 20px;
+    border-style: outset;
+    
+}
+
+.feedback{
+    margin-left: 1vw;
+    height: 3vw;
+    width: 5.5vw;
+    border: 0px;
+    background-color: #cccccc;
+}
+#criar{
+    width: 40vw;
+    height: 5vw;
+    margin-left: 1vw;
+    margin-right: 1vw;
+}
+.Post{
+  height: 3vw;
+  width: 45vw;  
+}
+.corpo2{
+    padding: 20px;
+    background-color: whitesmoke;
+    border-radius: 20px;
+    border-style: outset;
+    width: 20vw;
+}
+nav{
+    margin-bottom: 25px; /* margem para o menu nao esconder o conteudo */
+}
+
+.priv{
+    margin-left: 10px;
+    padding: 4px;
+}
+.descricao{
+    width: 20vw;
+}
+.a{
+    margin-left: 1.4vw;
+}
+.pedidos{
+    width: 10vw;
+}
+.topicos{
+    font-size: 12px; 
+}
+
+.i{
+    margin-left: -15px; 
+}
+.heigthCom{
+    height: 8.5vw;
+}
+.heigthCom2{
+    height: 6vw;
+    width: 25vw;
+}
+
+.partic{
+    padding: 4px;
+    margin-left: 55%;
+    margin: auto;
+}
