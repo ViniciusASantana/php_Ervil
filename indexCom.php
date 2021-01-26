@@ -9,7 +9,7 @@ if(isset($_POST['comID'])){
     $_SESSION['comID'] = $_POST['comID'];
 }
 $all = executarSelect($con, "SELECT DISTINCT * FROM Comunidade where idComunidade={$_SESSION['comID']}");
-$usuario = executarSelect($con, "SELECT DISTINCT cargo FROM Usuario_has_Comunidade where comunidade_idComunidade={$_SESSION['comID']} and cargo>0 and usuario_idUsuario=$log");
+$usuario = executarSelect($con, "SELECT DISTINCT cargo FROM Usuario_has_Comunidade where comunidade_idComunidade={$_SESSION['comID']} and cargo>0 and usuario_idUsuario={$_SESSION['log']}");
 $postadoPor= Array("Vinicius","IFSP","XxxX");
 $feedback= Array(3,2,4);
 $totalCom = 3;
@@ -24,6 +24,7 @@ desconectarBanco($con);
         <div class="d-flex rounded-lg" id='ferramentas'>
         <?php 
             if($usuario=2 && $all['categoria']=1 || $usuario=3 && $all['categoria']=1){
+                print_r($all['categoria']);
                 echo "<a href='Pedidos.php'><img src='imagens/Pedidos.png' alt='Pedidos' class='border border-dark rounded-lg' width='30' height='30'/></a>";
             }
                     

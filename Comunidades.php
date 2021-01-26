@@ -1,3 +1,4 @@
+
 <?php
 $titulo = "Comunidades";
 include 'fragmentos/cabecalho.php';
@@ -16,13 +17,13 @@ if(isset($_POST['categoria'])){
 
 
 
-$ver = executarSelect($con, "SELECT DISTINCT * FROM Usuario_has_Comunidade,Comunidade where usuario_idUsuario=$log and comunidade_idComunidade={$_SESSION['idCom']}");
+$ver = executarSelect($con, "SELECT DISTINCT * FROM Usuario_has_Comunidade,Comunidade where usuario_idUsuario={$_SESSION['log']} and comunidade_idComunidade={$_SESSION['idCom']}");
     if($ver!=1){
         print_r($_SESSION['categoria']);
         switch ($_SESSION['categoria']){
-            case 0: {executarInsert($con, "INSERT INTO Usuario_has_Comunidade(usuario_idUsuario,comunidade_idComunidade,cargo) VALUES ($log,{$_SESSION['idCom']},1)");
+            case 0: {executarInsert($con, "INSERT INTO Usuario_has_Comunidade(usuario_idUsuario,comunidade_idComunidade,cargo) VALUES ({$_SESSION['log']},{$_SESSION['idCom']},1)");
             unset ($_SESSION['categoria']);break;}
-            case 1: {executarInsert($con, "INSERT INTO Usuario_has_Comunidade(usuario_idUsuario,comunidade_idComunidade) VALUES ($log,{$_SESSION['idCom']})");
+            case 1: {executarInsert($con, "INSERT INTO Usuario_has_Comunidade(usuario_idUsuario,comunidade_idComunidade) VALUES ({$_SESSION['log']},{$_SESSION['idCom']})");
             unset ($_SESSION['categoria']);break;}
         }
         
@@ -43,7 +44,7 @@ $ver = executarSelect($con, "SELECT DISTINCT * FROM Usuario_has_Comunidade,Comun
             <?php
                 for($e = 0; $e < count($dados);$e++){
                     $com=$dados[$e];
-                    $a=executarSelect($con, "SELECT * FROM Usuario_has_Comunidade where usuario_idUsuario=$log and comunidade_idComunidade={$com['idComunidade']}");
+                    $a=executarSelect($con, "SELECT * FROM Usuario_has_Comunidade where usuario_idUsuario={$_SESSION['log']} and comunidade_idComunidade={$com['idComunidade']}");
                     if(empty($a)){
                         echo "<li class='list-group-item heigthCom p-4'><div class='d-flex rounded-sm conteiner-sm form-group ' >"
                     . "<a class='px-5'><img src='imagens/logo1.jpg' alt='Imagem de Perfil' class='border border-dark rounded-circle' width='120px' height='120px'/></a>"

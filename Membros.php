@@ -5,7 +5,7 @@ include 'fragmentos/menuResponsivo.php';
 
 $con= conectarBanco();
 $user = executarSelect($con, "SELECT * FROM usuario");
-$usuario = executarSelect($con, "SELECT cargo from Usuario_has_Comunidade where usuario_idUsuario=$log");
+$usuario = executarSelect($con, "SELECT cargo from Usuario_has_Comunidade where usuario_idUsuario={$_SESSION['log']}");
 $dados = executarSelect($con, "SELECT * from Usuario_has_Comunidade where comunidade_idComunidade=1");
 desconectarBanco($con);
 

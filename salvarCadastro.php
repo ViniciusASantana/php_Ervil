@@ -17,7 +17,7 @@ $sql = "INSERT into usuario (apelido, email, senha) VALUES ('$apelido', '$email'
 $flagRes = executarInsert($con, $sql);
 
 if($flagRes){
-    header('location:index.php');
+    header('location:Login.php');
 } else{
     $msg = "Houve um erro ao se cadastrar!";
 }

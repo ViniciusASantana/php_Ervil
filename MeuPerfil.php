@@ -6,7 +6,7 @@ include 'fragmentos/cabecalho.php';
 include 'fragmentos/menuResponsivo.php';
 
 $con= conectarBanco();
-$dados= executarSelect($con, "SELECT * FROM Usuario WHERE idUsuario=$log");
+$dados= executarSelect($con, "SELECT * FROM Usuario WHERE idUsuario={$_SESSION['log']}");
 desconectarBanco($con);
 ?>
 <main class="container mt-5">

@@ -1,13 +1,21 @@
         <!-- Menu responsivo com imagem e texto -->
         <?php
         if(!isset($_SESSION)){
-        session_start();
+            session_start();
         }
             include '_funcoesConfigBanco.php';
-            $log=1;
-            $login=true;
+            if(!isset($_SESSION['login'])){
+                $_SESSION['log'] = 0;
+                $_SESSION['login'] = false;
+            }
+            if(isset($_POST['sair'])){
+                unset($_SESSION['login']);
+                unset($_SESSION['log']);
+                header('location:Login.php');
+            }
+                
             $con= conectarBanco();
-            $dados= executarSelect($con, "SELECT DISTINCT * FROM Comunidade,Usuario_has_Comunidade WHERE usuario_idUsuario=$log and Cargo>0 and comunidade_idComunidade=idComunidade;");
+            $dados= executarSelect($con, "SELECT DISTINCT * FROM Comunidade,Usuario_has_Comunidade WHERE usuario_idUsuario={$_SESSION['log']} and Cargo>0 and comunidade_idComunidade=idComunidade;");
             
         ?>
 
@@ -51,12 +59,12 @@
                         </div>
                     </li>
                     <?php
-                        if($login == true){
+                        if($_SESSION['login'] == true){
                             echo "<li class='nav-item' id='Logado'>"
                             . "<a class='nav-link' href='MeuPerfil.php'>Perfil</a> "
                             . "</li>"
                             . "<li class='nav-item'>"
-                            . "<form actiom='menuResponsivo.php' method='GET'>"
+                            . "<form actiom='menuResponsivo.php' method='POST'>"
                                 . "<button type='submit' class='btn' id='sair' value='false' name='sair'>Sair</button>"
                             . "</form>"
                             . "</li>";

@@ -16,7 +16,7 @@ $desc = $_POST["desc"];
 $sql = "INSERT into comunidade (nome,categoria, descricao, topico ) VALUES ('$name',$cat,'$desc','$top')"; 
 $flagRes = executarInsert($con, $sql);
 $res= executarSelect($con, "SELECT idComunidade FROM Comunidade ORDER BY idComunidade DESC;");
-$r= executarInsert($con, "INSERT INTO Usuario_has_Comunidade(usuario_idUsuario,comunidade_idComunidade,cargo) VALUES ($log,{$res[0]["idComunidade"]},3)");
+$r= executarInsert($con, "INSERT INTO Usuario_has_Comunidade(usuario_idUsuario,comunidade_idComunidade,cargo) VALUES ({$_SESSION['log']},{$res[0]["idComunidade"]},3)");
 
 if($flagRes){
     header("location:indexCom.php");
