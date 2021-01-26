@@ -4,14 +4,13 @@ if(!isset($_SESSION)){
 }
 
 
-
 $titulo = "Membros";
 include 'fragmentos/cabecalho.php';
 include 'fragmentos/menuResponsivo.php';
 
 $con= conectarBanco();
 $usuario = executarSelect($con, "SELECT cargo from Usuario_has_Comunidade where usuario_idUsuario={$_SESSION['log']} and comunidade_idComunidade={$_SESSION['comID']}");
-$dados = executarSelect($con, "SELECT * from Usuario_has_Comunidade where comunidade_idComunidade={$_SESSION['comID']} AND cargo>0");
+$dados = executarSelect($con, "SELECT * from Usuario_has_Comunidade where comunidade_idComunidade={$_SESSION['comID']} AND cargo>0 ORDER BY cargo DESC");
 ?>
 
 <main class="container mt-5">
@@ -37,16 +36,17 @@ $dados = executarSelect($con, "SELECT * from Usuario_has_Comunidade where comuni
                                     Case 3 : echo "<strong>{$membro[0]["apelido"]}</strong>"
                                             . "<small class='rounded-sm bg-danger priv'>Dono</small>";
                                 }
-                                if ($usuario[0]["cargo"] > 1 && $_SESSION['login']==true) {
-                                    echo "<form action='MembrosButtons.php' method='POST'>"
+                                echo "<form action='MembrosButtons.php' method='POST'>"
                                     . "<input type='hidden' name='ButtonUserID' value={$membro[0]['idUsuario']}>"
-                                    . "<button type='submit' class='btn' name='Membros_button' value=1><small>Promover</small></button>"
+                                    . "<input type='hidden' name='suari' value={$usuario[0]['cargo']}>";
+                                if ($usuario[0]["cargo"] > 1 && $_SESSION['login']==true) {
+                                    echo "<button type='submit' class='btn' name='Membros_button' value=1><small>Promover</small></button>"
                                     . "<button type='submit' class='btn' name='Membros_button' value=3><small>Diminuir</small></button>"
                                     . "<button type='submit' class='btn' name='Membros_button' value=2><small>Expusar</small></button>"
                                     . "<button type='submit' class='btn' name='Membros_button' value=0><small>Reportar</small></button>"
                                     . "</form></div></li>";
                                 } else {
-                                    echo "<p><button type='submit' class='btn' name='Membros_button' value=0><small>Reportar</small></button></a></div></li>";
+                                    echo "<p><button type='submit' class='btn' name='Membros_button' value=0><small>Reportar</small></button></form></div></li>";    
                                 }
      
                         }
@@ -71,21 +71,20 @@ $dados = executarSelect($con, "SELECT * from Usuario_has_Comunidade where comuni
                                 Case 3 : echo "<strong>{$membro[0]['apelido']}</strong>"
                                         . "<small class='rounded-sm bg-danger priv'>Dono</small>";
                             }
-                                if ($usuario[0]["cargo"] > 1 && $_SESSION['login']==true) {
-                                    echo "<form action='MembrosButtons.php' method='POST'>"
+                                echo "<form action='MembrosButtons.php' method='POST'>"
                                     . "<input type='hidden' name='ButtonUserID' value={$membro[0]['idUsuario']}>"
-                                    . "<button type='submit' class='btn' name='Membros_button' value=1><small>Promover</small></button>"
+                                    . "<input type='hidden' name='suari' value={$usuario[0]['cargo']}>";
+                                if ($usuario[0]["cargo"] > 1 && $_SESSION['login']==true) {
+                                    echo "<button type='submit' class='btn' name='Membros_button' value=1><small>Promover</small></button>"
                                     . "<button type='submit' class='btn' name='Membros_button' value=3><small>Diminuir</small></button>"
                                     . "<button type='submit' class='btn' name='Membros_button' value=2><small>Expusar</small></button>"
                                     . "<button type='submit' class='btn' name='Membros_button' value=0><small>Reportar</small></button>"
                                     . "</form></div></li>";
                                 } else {
-                                    echo "<p><button type='submit' class='btn' name='Membros_button' value=0><small>Reportar</small></button></div></li>";
+                                    echo "<p><button type='submit' class='btn' name='Membros_button' value=0><small>Reportar</small></button></form></div></li>";    
                                 }
-                                    
-                        }
                     }
-
+                }
                 ?>
 
             </ul>
