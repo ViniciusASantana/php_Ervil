@@ -1,7 +1,7 @@
 <?php
 $titulo = "Login";
 $perfil = "imagens/OIP.jpg";
-// um exemplo de trabalhar com arquivos externos 
+// um exemplo de trabalhar com arquivos externos
 include 'fragmentos/cabecalho.php';
 include 'fragmentos/menuResponsivo.php';
 
@@ -19,26 +19,26 @@ desconectarBanco($con);
                 Apelido:
                 <div class="conteiner-sm form-group p-2 border">
                     <?= $dados[0]['apelido'] ?>
-               </div> 
+               </div>
                 <a class="p-2" href="#.php">Mudar Apelido</a>
                 <br><br>
-                
+
                 Email:
                 <div class="conteiner-sm form-group p-2 border">
                     <?= $dados[0]["email"]?>
-                </div>    
+                </div>
                 <a class="p-2" href="#.php">Mudar Email</a>
                 <br><br>
 
-                
+
             </div>
-        </div>    
+        </div>
         <br>
         <form action="#" method="GET">
             <button type="submit" class="btn btn-danger " id="disney">Excluir</button>
         </form>
     </div>
-        
+
 </main>
 <?php
     include 'fragmentos/rodape.php';
