@@ -1,17 +1,18 @@
-        <!-- Menu responsivo com imagem e texto -->
         <?php
         if(!isset($_SESSION)){
             session_start();
         }
             include '_funcoesConfigBanco.php';
-            if(!isset($_SESSION['login'])){
+            if(!isset($_SESSION['login'])){     
                 $_SESSION['log'] = 0;
                 $_SESSION['login'] = false;
+                //Introduz um sistema de visitante, criando um usuario limitado, um visitante
             }
             if(isset($_POST['sair'])){
                 unset($_SESSION['login']);
                 unset($_SESSION['log']);
                 header('location:Login.php');
+                //É o logout do sistema
             }
                 
             $con= conectarBanco();

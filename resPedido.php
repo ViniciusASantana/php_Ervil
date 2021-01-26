@@ -2,6 +2,7 @@
     header('location:Pedidos.php');
     include 'fragmentos/cabecalho.php';
     include 'fragmentos/menuResponsivo.php';
+    $idUs = $_POST['Aceitar'];
     $idCom= $_POST['idCom'];
     $con = conectarBanco();
     $a= executarSelect($con, "SELECT * FROM Usuario_has_Comunidade WHERE usuario_idUsuario=$idUs and comunidade_idComunidade=$idCom and cargo=0");

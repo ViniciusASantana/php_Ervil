@@ -14,8 +14,6 @@ $postadoPor= Array("Vinicius","IFSP","XxxX");
 $feedback= Array(3,2,4);
 $totalCom = 3;
 $TitPost = array ("blá bla bla","blá bla bla","blá bla bla");
-
-
 desconectarBanco($con);
 ?>
 <main class="container mt-5">
@@ -23,8 +21,8 @@ desconectarBanco($con);
     <div class="corpo d-fle">
         <div class="d-flex rounded-lg" id='ferramentas'>
         <?php 
-            if($usuario=2 && $all['categoria']=1 || $usuario=3 && $all['categoria']=1){
-                print_r($all['categoria']);
+            if($usuario=2 && $all[0]['categoria']==1 || $usuario=3 && $all[0]['categoria']==1){
+                
                 echo "<a href='Pedidos.php'><img src='imagens/Pedidos.png' alt='Pedidos' class='border border-dark rounded-lg' width='30' height='30'/></a>";
             }
                     

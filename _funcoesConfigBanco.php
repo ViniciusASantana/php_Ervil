@@ -101,11 +101,9 @@ function executarUpdate($con, $sql){
     $res = mysqli_query($con, $sql);     //executa comando sql no banco
     
     if($res && mysqli_affected_rows($con) > 0 ){ // em caso de sucesso e pelo menos uma linha foi atualizada no banco
-        echo "Atualizado com sucesso<br>";
+        
         return true;
     } else{
-        echo "Nenhum campo atualizado: <h3> $sql </h3> <br>";
-        echo mysqli_error($con);
         return false;
     }               
     

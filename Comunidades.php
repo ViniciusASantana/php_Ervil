@@ -19,7 +19,6 @@ if(isset($_POST['categoria'])){
 
 $ver = executarSelect($con, "SELECT DISTINCT * FROM Usuario_has_Comunidade,Comunidade where usuario_idUsuario={$_SESSION['log']} and comunidade_idComunidade={$_SESSION['idCom']}");
     if($ver!=1){
-        print_r($_SESSION['categoria']);
         switch ($_SESSION['categoria']){
             case 0: {executarInsert($con, "INSERT INTO Usuario_has_Comunidade(usuario_idUsuario,comunidade_idComunidade,cargo) VALUES ({$_SESSION['log']},{$_SESSION['idCom']},1)");
             unset ($_SESSION['categoria']);break;}
