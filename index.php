@@ -1,4 +1,5 @@
 <?php
+//repositorio base
 $titulo = "Página Inicial";
 // um exemplo de trabalhar com arquivos externos 
 include 'fragmentos/cabecalho.php';
