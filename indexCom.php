@@ -21,7 +21,7 @@ $usuario = executarSelect($con, "SELECT DISTINCT cargo FROM Usuario_has_Comunida
     <div class='media' style="width: 100%;">
         <div class="mx-auto" style="width: 80%;">
 
-            <div class="d-flex conteiner-sm form-group p-2 border" >
+            <div class="d-flex conteiner-sm form-group p-2 border">
                 <?php 
                     if($usuario=2 && $all[0]['categoria']==1 || $usuario=3 && $all[0]['categoria']==1){
 
@@ -85,7 +85,7 @@ $usuario = executarSelect($con, "SELECT DISTINCT cargo FROM Usuario_has_Comunida
             </div>
             <hr>
             <form action="Criar.php" method="POST">
-                <button type="submit" class="btn btn-primary" style="border-radius: 2vw; width: 100%;">
+                <button type="submit" class="btn btn-primary btn-outline-light" style="border-radius: 2vw; width: 100%;">
                     <strong>Criar Postagem</strong>
                 </button>
             </form>
