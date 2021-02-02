@@ -1,5 +1,5 @@
 <?php
-$titulo = "Membros";
+$titulo = "Criar Postagem";
 $comunidade = "IFSP";
 $imagem= "imagens/logo1.jpg";
 include 'fragmentos/cabecalho.php';
@@ -19,7 +19,7 @@ include 'fragmentos/menuResponsivo.php';
             
         <div class="p-4 d-flex align-content-center" style="background-color: whitesmoke;">
             <form action="#" method="GET">
-                <textarea name="comentario" id="criar" rows=3 cols=35 maxlength=80 placeholder=" Texto">
+                <textarea name="comentario" id="criar"  maxlength=400 placeholder=" Texto">
 
                 </textarea>
                 <br><br>

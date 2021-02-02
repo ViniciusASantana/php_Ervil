@@ -1,11 +1,12 @@
 <?php
 $titulo = "Login";
-$perfil = "imagens/OIP.jpg";
+
 // um exemplo de trabalhar com arquivos externos
 include 'fragmentos/cabecalho.php';
 include 'fragmentos/menuResponsivo.php';
 
 $con= conectarBanco();
+$perfil = "imagens/usuario.png";
 $dados= executarSelect($con, "SELECT * FROM Usuario WHERE idUsuario={$_SESSION['log']}");
 desconectarBanco($con);
 ?>
