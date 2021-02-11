@@ -13,7 +13,7 @@ if(isset($_POST['Feedback'])){
     executarUpdate($con, "UPDATE Postagem SET feedback=feedback+{$_SESSION['Feedback']} WHERE usuario_has_comunidade_usuario={$userPost['usuario_has_comunidade_usuario']}");
 }else $_SESSION['Feedback'] = "";
 
-$post = executarSelect($con, "SELECT * FROM Postagem WHERE usuario_has_comunidade_idComunidade={$_SESSION['comID']}");
+$post = executarSelect($con, "SELECT * FROM Postagem WHERE idComunidade={$_SESSION['comID']}");
 $all = executarSelect($con, "SELECT DISTINCT * FROM Comunidade where idComunidade={$_SESSION['comID']}");
 $usuario = executarSelect($con, "SELECT DISTINCT cargo FROM Usuario_has_Comunidade where comunidade_idComunidade={$_SESSION['comID']} and cargo>0 and usuario_idUsuario={$_SESSION['log']}");
 ?>
@@ -47,7 +47,7 @@ $usuario = executarSelect($con, "SELECT DISTINCT cargo FROM Usuario_has_Comunida
                     <?php
                         for($e = 0; $e < count($post);$e++){
                             $userPost = $post[$e];
-                            $Postado = executarSelect($con, "SELECT * FROM Usuario WHERE idUsuario={$userPost['usuario_has_comunidade_usuario']}");
+                            $Postado = executarSelect($con, "SELECT * FROM Usuario WHERE idUsuario={$userPost['usuario']}");
                             echo "<div class='media'>"
                             . "<li class='list-group-item text-center' style='height: 6vw;background-color: whitesmoke;'>"
                                 . "<form action='indexCom.php' method='POST' name='Feedback' id='form'>"

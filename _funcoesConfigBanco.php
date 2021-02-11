@@ -109,3 +109,17 @@ function executarUpdate($con, $sql){
     
 }
 
+function executarDelete($con, $sql) {
+    // executa comando delete sql no banco
+    $res = mysqli_query($con, $sql);
+    
+    if($res) {        
+       // echo "Registro foi excluído";  // comentar se não quiser exibir mais a mensagem
+        return true;
+    } else {
+        echo "Erro ao exluir: $sql <br>";
+        echo mysqli_error($con);
+        return false;
+    }
+}
+

@@ -2,10 +2,42 @@
 /* estilo pelo nome da tag */
 body{
     margin-bottom: 20px;
+    background-image: url("../imagens/imagem3.jpg");
+     background-repeat: no-repeat;
+    background-size: 100%;
+    /*background-color: #939597;*/
+  
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+   
+}
+.estilo_card_inicio1{
+     display: inline-block;
+     width:25vw;
+     margin-left: 180px;
+     
+    
+}
+.estilo_card_inicio2{
+      display: inline-block;
+     width:25vw;
+     
+      
+  
+     
+}
+.estilo_card_inicio3{
+    display: inline-block;
+    width:25vw;
+     
+  
 }
 
+
 #entrar{
-    margin-left: 1550px;
+    margin-left: 1020px;
 }
 
 #Logado{
@@ -62,7 +94,10 @@ body{
     margin-left: 1vw;
     margin-right: 1vw;
 }
-
+.Post{
+  height: 3vw;
+  width: 45vw;  
+}
 .corpo2{
     padding: 20px;
     background-color: whitesmoke;
@@ -106,4 +141,27 @@ nav{
     padding: 4px;
     margin-left: 55%;
     margin: auto;
+}
+#estilo-titulo{
+     margin-left: 450px;
+    
+}
+#titulo-comunidade{
+    margin-left: 450px;
+    
+}
+#tituto-sobrenos1{
+    text-align: center;
+}
+#tituto-sobrenos2{
+     text-align: center;
+    
+}
+#titulo-seguranca{
+    text-align: center;
+    
+}
+#estilo-texto-inicio{
+     text-align: center;
+   
 }

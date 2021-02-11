@@ -32,11 +32,11 @@ $pedido = executarSelect($con, "SELECT DISTINCT * FROM Usuario_has_Comunidade wh
                                 . "<p><small>{$us[0]['idUsuario']}</small>"
                                 //. "<p><textarea class='pedidos'> $b[0]</textarea>"
                             . "</div>"
-                            . "<form action='resPedido.php?idCom=' method='POST'>"
+                            . "<form action='resPedido.php' method='POST'>"
                                 . "<input type='hidden' name='idCom' value='$idCom'>" 
                                 . "<button type='submit' class='btn btn-info partic mt-3 mr-2' name='Aceitar' value='{$us[$e]['idUsuario']}'>Aceitar</button><p>"  
                             . "</form>"
-                            . "<form action='delPedido.php?idCom=' method='POST'>"
+                            . "<form action='delPedido.php' method='POST'>"
                                 . "<button type='submit' class='btn btn-danger partic mt-3' name='Recusar' value='{$us[$e]['idUsuario']}'>Recusar</button>"
                                 . "<input type='hidden' name='idCom' value='$idCom'>" 
                             . "</form></div></li>";  
