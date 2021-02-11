@@ -27,7 +27,7 @@ $dados = executarSelect($con, "SELECT * from Usuario_has_Comunidade where comuni
                             $apelido=$dados[$e];
                             $membro= executarSelect($con, "SELECT * FROM Usuario WHERE idUsuario={$apelido['usuario_idUsuario']}");
                             echo "<li class='list-group-item heigthCom2 p-4'><div class='d-flex rounded-sm conteiner-sm form-group ' >"
-                            . "<a class='px-2 py-1'><img src=imagens/usuario.png alt='Imagem de Perfil' class='border border-dark rounded-circle' width='60px' height='60px'/></a>"
+                            . "<a class='px-2 py-1'><img src={$membro[0]['foto_usuario']} alt='Imagem de Perfil' class='border border-dark rounded-circle' width='60px' height='60px'/></a>"
                             . "<div class='form-group col'>";
                                 switch ($apelido["cargo"]){
                                     Case 1: echo "<strong>{$membro[0]["apelido"]}</strong>";break;
@@ -62,7 +62,7 @@ $dados = executarSelect($con, "SELECT * from Usuario_has_Comunidade where comuni
                             $apelido=$dados[$e];
                             $membro= executarSelect($con, "SELECT * FROM Usuario WHERE idUsuario={$apelido['usuario_idUsuario']}");
                             echo "<li class='list-group-item heigthCom2 p-4'><div class='d-flex rounded-sm conteiner-sm form-group ' >"
-                            . "<a class='px-2 py-1'><img src=imagens/usuario.png alt='Imagem de Perfil' class='border border-dark rounded-circle' width='60px' height='60px'/></a>"
+                            . "<a class='px-2 py-1'><img src={$membro[0]['foto_usuario']} alt='Imagem de Perfil' class='border border-dark rounded-circle' width='60px' height='60px'/></a>"
                             . "<div class='form-group col'>";
                             switch ($apelido["cargo"]){
                                 Case 1: echo "<strong>{$membro[0]['apelido']}</strong>";break;

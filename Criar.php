@@ -17,7 +17,7 @@ $comunidade= executarSelect($con, "SELECT * FROM Comunidade WHERE idComunidade={
 
 <main class="container mt-5">
     <div class=" mx-auto" style="width: 45vw;">
-        <h5 class="text-monospace"><strong>Criar uma postagem</strong></h5>
+        <h5 class="text-monospace"><strong style="color: white;">Criar uma postagem</strong></h5>
         <hr>
         <div class="conteiner form-group p-2 border" style="width: 15vw;">
             <img src=<?= $imagem?> alt='Pedidos' class='rounded-circle' width='20' height='20'/>

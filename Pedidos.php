@@ -26,7 +26,7 @@ $pedido = executarSelect($con, "SELECT DISTINCT * FROM Usuario_has_Comunidade wh
                         if(($e+1)%2==1){
                             $us = executarSelect($con, "SELECT * FROM Usuario_has_Comunidade,Usuario where cargo=0 and idUsuario={$pedido[$e]['usuario_idUsuario']}");
                             echo "<li class='list-group-item heigthCom2 p-4'><div class='d-flex rounded-sm conteiner-sm form-group ' >"
-                            . "<a class='px-2 py-1'><img src=$fotosPerfis alt='Imagem de Perfil' class='border border-dark rounded-circle' width='60px' height='60px'/></a>"
+                            . "<a class='px-2 py-1'><img src={$us[0]['foto_usuario']} alt='Imagem de Perfil' class='border border-dark rounded-circle' width='60px' height='60px'/></a>"
                             . "<div class='form-group col'>"
                                 . "<strong>{$us[0]['apelido']}</strong>"
                                 . "<p><small>{$us[0]['idUsuario']}</small>"

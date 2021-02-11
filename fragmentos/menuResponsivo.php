@@ -9,9 +9,8 @@ if (!isset($_SESSION['login'])) {
     //Introduz um sistema de visitante, criando um usuario limitado, um visitante
 }
 if (isset($_POST['sair'])) {
-    unset($_SESSION['login']);
-    unset($_SESSION['log']);
-    header('location:Login.php');
+    header('location:Index.php');
+    session_destroy();
     //É o logout do sistema
 }
 
