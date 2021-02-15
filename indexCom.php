@@ -8,13 +8,26 @@ conectarBanco();
 if(isset($_POST['comID'])){
     $_SESSION['comID'] = $_POST['comID'];
 }
+
+if(isset($_POST['Visual'])){
+    $_SESSION['comID'] = $_POST['Visual'];
+}
+
 if(isset($_POST['Feedback'])){
-    $_SESSION['Feedback'] = $_POST['Feedback'];
-    executarUpdate($con, "UPDATE Postagem SET feedback=feedback+{$_SESSION['Feedback']} WHERE usuario_has_comunidade_usuario={$userPost['usuario_has_comunidade_usuario']}");
-}else $_SESSION['Feedback'] = "";
+    executarUpdate($con, "UPDATE Postagem SET feedback=feedback+{$_POST['Feedback']} WHERE usuario={$_POST['userPost']}");
+}
+
+if(isset($_POST['deixarCom'])){
+    mysqli_query($con, "DELETE FROM Usuario_has_Comunidade WHERE usuario_idUsuario={$_SESSION['log']} AND comunidade_idComunidade={$_SESSION['comID']}");
+    header('location:Comunidades.php');
+}
+
 
 $post = executarSelect($con, "SELECT * FROM Postagem WHERE idComunidade={$_SESSION['comID']}");
 $all = executarSelect($con, "SELECT DISTINCT * FROM Comunidade where idComunidade={$_SESSION['comID']}");
+
+$a = executarSelect($con, "SELECT DISTINCT cargo FROM Usuario_has_Comunidade where comunidade_idComunidade={$_SESSION['comID']} and usuario_idUsuario={$_SESSION['log']}");
+
 $usuario = executarSelect($con, "SELECT DISTINCT cargo FROM Usuario_has_Comunidade where comunidade_idComunidade={$_SESSION['comID']} and cargo>0 and usuario_idUsuario={$_SESSION['log']}");
 ?>
 <main class="container-fluid mt-5">
@@ -58,6 +71,7 @@ $usuario = executarSelect($con, "SELECT DISTINCT cargo FROM Usuario_has_Comunida
                                         . "<button type='submit' name='Feedback' class='btn dropdown-item' value=-1>"
                                             . "<img src='imagens/Seta_Para_Baixo.png' alt='Pedidos' class='' width='20px' height='20px'/>"
                                         . "</button>"
+                                        . "<input type='hidden' name='userPost' value='{$userPost['usuario']}'>"
                                 . "</form>"
                             . "</li>"
                             . "<li class='list-group-item text-left border' style='height: 6vw;width:100%;'>";
@@ -83,12 +97,23 @@ $usuario = executarSelect($con, "SELECT DISTINCT cargo FROM Usuario_has_Comunida
                 <br>
                 <small>Participantes</small>
             </div>
-            <hr>
-            <form action="Criar.php" method="POST">
-                <button type="submit" class="btn btn-primary btn-outline-light" style="border-radius: 2vw; width: 100%;">
-                    <strong>Criar Postagem</strong>
-                </button>
-            </form>
+            <?php
+            if(count($a)>0 && $_SESSION['login']==true ){
+            ?>
+                <hr>
+                <form action="Criar.php" method="POST">
+                    <button type="submit" class="btn btn-primary btn-outline-light" style="border-radius: 2vw; width: 100%;">
+                        <strong>Criar Postagem</strong>
+                    </button>
+                </form>
+                <form action="indexCom.php" method="POST">
+                    <button type="submit" class="btn btn-danger btn-outline-light" name='deixarCom' value="deixar" style="border-radius: 2vw; width: 100%;">
+                        <strong>Deixar Comunidade</strong>
+                    </button>
+                </form>
+            <?php
+            }
+            ?>
         </div>
     </div>
 </main>

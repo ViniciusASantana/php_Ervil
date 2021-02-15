@@ -8,9 +8,8 @@ include 'fragmentos/menuResponsivo.php';
 ?>
 
 <main class="container mt-5">
-        <div class="corpo">
-            <h2><strong>Criar nova Comunidade</strong></h2>
-            <br>
+        <div class="media" style="width: 100%;">
+
         <!-- uma boa pratica de organizacao - coloque uma div para agrupar o label e o input -->
             <?php
                 include 'fragmentos/formularios/formComunidade.php';

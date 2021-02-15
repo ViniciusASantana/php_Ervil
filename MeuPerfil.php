@@ -33,8 +33,8 @@ if(isset($_POST['Enviar'])){
                 <img src=<?= $dados[0]['foto_usuario'] ?> alt="Imagem de Perfil" class="border border-dark rounded-lg" width="250rem" height="250rem"/>
                 </div>
                 <form action="MeuPerfil.php" method="POST" enctype="multipart/form-data">
-                    <input name='foto_usuario' id="foto_usuario" class="p-2" type="file" action="MeuPerfil.php" method="POST" >
-                    <button type="submit" class="btn btn-danger" name="Enviar" value="Enviar">Enviar Foto</button>
+                    <input name='foto_usuario' id="foto_usuario" class="p-2" type="file" action="MeuPerfil.php" method="POST" required>
+                    <button type="submit" class="btn btn-primary" name="Enviar" value="Enviar"  >Enviar Foto</button>
                 </form>
             </div>
 

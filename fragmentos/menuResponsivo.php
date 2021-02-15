@@ -57,7 +57,7 @@ $dados = executarSelect($con, "SELECT DISTINCT * FROM Comunidade,Usuario_has_Com
                             . "<small class='p-3'> Minhas comunidades</small>";
                         }
                         echo "<form action='indexCom.php' method='POST' name='form' id='form'><button type='submit' name='comID' class='btn dropdown-item' value={$seguindo['idComunidade']}>"
-                        . "<img src='imagens/logo1.jpg' alt='Imagem de Perfil' class='border border-dark rounded-circle' width='25px' height='25px'/>"
+                        . "<img src={$seguindo["foto_Comunidade"]} alt='Imagem de Perfil' class='border border-dark rounded-circle' width='25px' height='25px'/>"
                         . "       {$seguindo["nome"]}</button></form>";
                     }
                     ?>

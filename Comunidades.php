@@ -18,20 +18,16 @@ if(isset($_POST['categoria'])){
 
 
 $ver = executarSelect($con, "SELECT DISTINCT * FROM Usuario_has_Comunidade,Comunidade where usuario_idUsuario={$_SESSION['log']} and comunidade_idComunidade={$_SESSION['idCom']}");
+print_r($_SESSION['log']);
     if($ver!=1){
         switch ($_SESSION['categoria']){
-            case 0: {executarInsert($con, "INSERT INTO Usuario_has_Comunidade(usuario_idUsuario,comunidade_idComunidade,cargo) VALUES ({$_SESSION['log']},{$_SESSION['idCom']},1)");
-            unset ($_SESSION['categoria']);break;}
+            case 0: {
+                executarInsert($con, "INSERT INTO Usuario_has_Comunidade(usuario_idUsuario,comunidade_idComunidade,cargo) VALUES ({$_SESSION['log']},{$_SESSION['idCom']},1)");
+                unset ($_SESSION['categoria']);break;}
             case 1: {executarInsert($con, "INSERT INTO Usuario_has_Comunidade(usuario_idUsuario,comunidade_idComunidade) VALUES ({$_SESSION['log']},{$_SESSION['idCom']})");
             unset ($_SESSION['categoria']);break;}
         }
-        
-         
-    
     }
-
-
-
 ?>
 
 <main class="container mt-5">
@@ -45,19 +41,23 @@ $ver = executarSelect($con, "SELECT DISTINCT * FROM Usuario_has_Comunidade,Comun
                     $com=$dados[$e];
                     $a=executarSelect($con, "SELECT * FROM Usuario_has_Comunidade where usuario_idUsuario={$_SESSION['log']} and comunidade_idComunidade={$com['idComunidade']}");
                     if(empty($a)){
-                        echo "<li class='list-group-item heigthCom p-4'><div class='d-flex rounded-sm conteiner-sm form-group ' >"
-                    . "<a class='px-5'><img src='imagens/logo1.jpg' alt='Imagem de Perfil' class='border border-dark rounded-circle' width='120px' height='120px'/></a>"
-                    . "<div class='form-group col'>"
-                            . "<h5>{$com["nome"]}";
+                        echo "<li class='list-group-item heigthCom p-4'><form action='Comunidades.php' method='POST' class='pr-5'><div class='d-flex rounded-sm conteiner-sm form-group ' >"
+                    . "<a class='px-5'><img src={$com["foto_Comunidade"]} alt='Imagem da Comunidade' class='border border-dark rounded-circle' width='120rem' height='120rem'/></a>"
+                    . "<div class='form-group col'>";
+                    if($com["categoria"]==0){
+                        echo "<button type='submit' class='btn' formaction='indexCom.php' value='{$com['idComunidade']}' name='Visual' value='{$com['idComunidade']}'>"
+                        . "<h5>{$com['nome']}</button>";
+                    }else echo "<h5>{$com['nome']}";
+                            
                     if($com["categoria"]==1){
                             echo "<small class='rounded-sm bg-info priv'>Particular</small>";
-                        }else echo "<small class='rounded-sm bg-info priv'>Pública</small>";
+                        }
                         echo "</h5>";
                         if($com["topico"]!=null)    echo "<p><small class='btn-danger rounded-pill px-2 topicos'>{$com["topico"]}</small>";
                         if($com["num_partic"]!=null)    echo "<small class='pl-3'>{$com["num_partic"]} Participantes</small>";
                         if($com["descricao"]!=null)    echo "<p><textarea class='descricao'> {$com["descricao"]}</textarea>";
                     echo "</div>"
-                    . "<form action='Comunidades.php' method='POST' class='pr-5'>"
+                    . ""
                     . "<br><br><br><br><button type='submit' class='btn btn-info partic' name='Participar' value='{$com['idComunidade']}'>Participar</button></div>"
                     . "<input type='hidden' name='categoria' value='{$com['categoria']}'>" 
                     . "</form>"
