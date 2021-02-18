@@ -18,7 +18,6 @@ if(isset($_POST['categoria'])){
 
 
 $ver = executarSelect($con, "SELECT DISTINCT * FROM Usuario_has_Comunidade,Comunidade where usuario_idUsuario={$_SESSION['log']} and comunidade_idComunidade={$_SESSION['idCom']}");
-print_r($_SESSION['log']);
     if($ver!=1){
         switch ($_SESSION['categoria']){
             case 0: {
@@ -39,6 +38,7 @@ print_r($_SESSION['log']);
             <?php
                 for($e = 0; $e < count($dados);$e++){
                     $com=$dados[$e];
+                    $count = executarSelect($con, "SELECT COUNT(*)as usuario_idUsuario FROM Usuario_has_Comunidade WHERE comunidade_idComunidade = {$com['idComunidade']} AND cargo>0");
                     $a=executarSelect($con, "SELECT * FROM Usuario_has_Comunidade where usuario_idUsuario={$_SESSION['log']} and comunidade_idComunidade={$com['idComunidade']}");
                     if(empty($a)){
                         echo "<li class='list-group-item heigthCom p-4'><form action='Comunidades.php' method='POST' class='pr-5'><div class='d-flex rounded-sm conteiner-sm form-group ' >"
@@ -54,7 +54,7 @@ print_r($_SESSION['log']);
                         }
                         echo "</h5>";
                         if($com["topico"]!=null)    echo "<p><small class='btn-danger rounded-pill px-2 topicos'>{$com["topico"]}</small>";
-                        if($com["num_partic"]!=null)    echo "<small class='pl-3'>{$com["num_partic"]} Participantes</small>";
+                        echo "<small class='pl-3'>{$count[0]['usuario_idUsuario']} Participantes</small>";
                         if($com["descricao"]!=null)    echo "<p><textarea class='descricao'> {$com["descricao"]}</textarea>";
                     echo "</div>"
                     . ""

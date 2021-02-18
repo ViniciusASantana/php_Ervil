@@ -13,10 +13,6 @@ if(isset($_POST['Visual'])){
     $_SESSION['comID'] = $_POST['Visual'];
 }
 
-if(isset($_POST['Feedback'])){
-    executarUpdate($con, "UPDATE Postagem SET feedback=feedback+{$_POST['Feedback']} WHERE usuario={$_POST['userPost']}");
-}
-
 if(isset($_POST['deixarCom'])){
     mysqli_query($con, "DELETE FROM Usuario_has_Comunidade WHERE usuario_idUsuario={$_SESSION['log']} AND comunidade_idComunidade={$_SESSION['comID']}");
     header('location:Comunidades.php');
@@ -25,9 +21,26 @@ if(isset($_POST['deixarCom'])){
 
 $post = executarSelect($con, "SELECT * FROM Postagem WHERE idComunidade={$_SESSION['comID']}");
 $all = executarSelect($con, "SELECT DISTINCT * FROM Comunidade where idComunidade={$_SESSION['comID']}");
+$count = executarSelect($con, "SELECT COUNT(*) as usuario_idUsuario FROM Usuario_has_Comunidade WHERE comunidade_idComunidade = {$_SESSION['comID']} AND cargo>0");
 
 $a = executarSelect($con, "SELECT DISTINCT cargo FROM Usuario_has_Comunidade where comunidade_idComunidade={$_SESSION['comID']} and usuario_idUsuario={$_SESSION['log']}");
-
+if(isset($_POST['Feedback'])){
+    if(count($a)>0 && $_SESSION['login']==true ){
+        $valor = $_POST['Feedback'];
+        $idPost = $_POST['idPost'];
+        
+        $dados = executarSelect($con, "SELECT * FROM feedback WHERE idPost=$idPost AND idUsuario={$_SESSION['log']}");
+        
+        if(empty($dados))
+            executarInsert ($con, "INSERT INTO feedback(idPost,idUsuario,Usuario_valor) VALUES ($idPost,{$_SESSION['log']},$valor)");
+        else{
+            executarUpdate ($con, "UPDATE feedback SET Usuario_valor=Usuario_valor+$valor WHERE idPost=$idPost AND idUsuario={$_SESSION['log']} AND Usuario_valor+$valor<=1 AND Usuario_valor+$valor>=-1");
+        }
+        $soma = executarSelect($con, "SELECT SUM(Usuario_valor) as soma FROM feedback WHERE idPost=$idPost");
+        executarUpdate($con, "UPDATE Postagem SET feedback={$soma[0]['soma']} WHERE idPost=$idPost"); 
+        header('location:IndexCom.php'); //Somente para "forçar" a atualização da página
+    }
+}
 $usuario = executarSelect($con, "SELECT DISTINCT cargo FROM Usuario_has_Comunidade where comunidade_idComunidade={$_SESSION['comID']} and cargo>0 and usuario_idUsuario={$_SESSION['log']}");
 ?>
 <main class="container-fluid mt-5">
@@ -61,6 +74,7 @@ $usuario = executarSelect($con, "SELECT DISTINCT cargo FROM Usuario_has_Comunida
                         for($e = 0; $e < count($post);$e++){
                             $userPost = $post[$e];
                             $Postado = executarSelect($con, "SELECT * FROM Usuario WHERE idUsuario={$userPost['usuario']}");
+                            $feedback = executarSelect($con, "SELECT * FROM feedback WHERE idPost={$userPost['idPost']}");
                             echo "<div class='media'>"
                             . "<li class='list-group-item text-center' style='height: 6vw;background-color: whitesmoke;'>"
                                 . "<form action='indexCom.php' method='POST' name='Feedback' id='form'>"
@@ -71,7 +85,7 @@ $usuario = executarSelect($con, "SELECT DISTINCT cargo FROM Usuario_has_Comunida
                                         . "<button type='submit' name='Feedback' class='btn dropdown-item' value=-1>"
                                             . "<img src='imagens/Seta_Para_Baixo.png' alt='Pedidos' class='' width='20px' height='20px'/>"
                                         . "</button>"
-                                        . "<input type='hidden' name='userPost' value='{$userPost['usuario']}'>"
+                                        . "<input type='hidden' name='idPost' value='{$userPost['idPost']}'>"
                                 . "</form>"
                             . "</li>"
                             . "<li class='list-group-item text-left border' style='height: 6vw;width:100%;'>";
@@ -93,7 +107,7 @@ $usuario = executarSelect($con, "SELECT DISTINCT cargo FROM Usuario_has_Comunida
             }
             ?>
             <div class="mt-3">
-                <?= $all[0]['num_partic'] ?>
+                <?= $count[0]['usuario_idUsuario'] ?>
                 <br>
                 <small>Participantes</small>
             </div>

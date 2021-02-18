@@ -5,10 +5,14 @@ if(!isset($_SESSION)){
 $titulo = "Criar Postagem";
 include 'fragmentos/cabecalho.php';
 include 'fragmentos/menuResponsivo.php';
+date_default_timezone_set('America/Sao_Paulo');
 
 if(isset($_POST['conteudo']) && isset($_POST['title'])){
-    if($_SESSION['login']==true)
-    executarInsert($con, "INSERT INTO Postagem(usuario, idComunidade, conteudo, title) VALUES ({$_SESSION['log']},{$_SESSION['comID']},'{$_POST['conteudo']}','{$_POST['title']}')");
+    if($_SESSION['login']==true){
+        $data = new DateTime();
+        $data = $data->format('Y/m/d h:i:s');
+        executarInsert($con, "INSERT INTO Postagem(usuario, idComunidade, conteudo, title, data_post) VALUES ({$_SESSION['log']},{$_SESSION['comID']},'{$_POST['conteudo']}','{$_POST['title']}','$data')");
+    }
     header('location:IndexCom.php');
 }
 $comunidade= executarSelect($con, "SELECT * FROM Comunidade WHERE idComunidade={$_SESSION['comID']}");
@@ -27,12 +31,10 @@ $comunidade= executarSelect($con, "SELECT * FROM Comunidade WHERE idComunidade={
         <div class="p-4 d-flex align-content-center" style="background-color: whitesmoke;">
             <form action="Criar.php" method="POST">
                 <div class="form-group col">
-                <input type="text" class="form-control" name="title" placeholder=" Título">
+                    <input type="text" class="form-control" name="title" placeholder=" Título" required>
                 </div>
                 
-                <textarea name="conteudo" id="criar"  maxlength=400 placeholder=" Texto">
-
-                </textarea>
+                <textarea name="conteudo" id="criar"  maxlength=400 placeholder=" Conteúdo da postagem" required=""></textarea>
                 <br><br>
                 <button type='submit' class='btn bg-primary btn-outline-light' id="confirmar"><strong>Postar</strong></button>
             </form>
