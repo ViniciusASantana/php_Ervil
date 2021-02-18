@@ -28,7 +28,7 @@
 
                     <div class="form-group  ">
                         <label for="top">Tópicos:</label>
-                        <input type="text" class="form-control" id="top" name="top">    
+                        <input type="text" class="form-control" id="top" name="top" maxlength="15">    
                     </div>
                     <br>
                     <div class="form-group">

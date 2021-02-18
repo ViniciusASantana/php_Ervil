@@ -12,9 +12,12 @@ $email = $_POST["email"];
 $senha = $_POST["senha"];
 $passConf = $_POST["passConf"];
 
-
-$sql = "INSERT into usuario (apelido, email, senha) VALUES ('$apelido', '$email', '$senha') "; 
-$flagRes = executarInsert($con, $sql);
+if($senha != $passConf){
+    header('location:Cadastro.php');
+}else{
+    $sql = "INSERT into usuario (apelido, email, senha) VALUES ('$apelido', '$email', '$senha') "; 
+    $flagRes = executarInsert($con, $sql);
+}
 
 if($flagRes){
     header('location:Login.php');

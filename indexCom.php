@@ -17,9 +17,12 @@ if(isset($_POST['deixarCom'])){
     mysqli_query($con, "DELETE FROM Usuario_has_Comunidade WHERE usuario_idUsuario={$_SESSION['log']} AND comunidade_idComunidade={$_SESSION['comID']}");
     header('location:Comunidades.php');
 }
+$post = executarSelect($con, "SELECT * FROM Postagem WHERE idComunidade={$_SESSION['comID']} ORDER BY data_post ASC");
 
+if(isset($_POST['populares'])){
+    $post = executarSelect($con, "SELECT * FROM Postagem WHERE idComunidade={$_SESSION['comID']} ORDER BY feedback DESC");
+}
 
-$post = executarSelect($con, "SELECT * FROM Postagem WHERE idComunidade={$_SESSION['comID']}");
 $all = executarSelect($con, "SELECT DISTINCT * FROM Comunidade where idComunidade={$_SESSION['comID']}");
 $count = executarSelect($con, "SELECT COUNT(*) as usuario_idUsuario FROM Usuario_has_Comunidade WHERE comunidade_idComunidade = {$_SESSION['comID']} AND cargo>0");
 
@@ -46,37 +49,64 @@ $usuario = executarSelect($con, "SELECT DISTINCT cargo FROM Usuario_has_Comunida
 <main class="container-fluid mt-5">
     <div class='media' style="width: 100%;">
         <div class="mx-auto" style="width: 80%;">
-
             <div class="d-flex conteiner-sm form-group p-2 border">
+                <form action="indexCom.php" method="POST" class="ml-1">
+                    <input type="submit" value="Recentes" name="recentes" class="btn btn-outline-primary"/>
+                    <input type="submit" value="Populares" name="populares" class="btn btn-outline-primary"/>
+                </form>
                 <?php 
-                    if($usuario=2 && $all[0]['categoria']==1 || $usuario=3 && $all[0]['categoria']==1){
+                    if(count($a)>0 && $_SESSION['login']==true && $usuario[0]['cargo']==2 && $all[0]['categoria']==1 || count($a)>0 && $_SESSION['login']==true && $usuario[0]['cargo']==3 && $all[0]['categoria']==1){
 
-                        echo "<form action='Pedidos.php' method='POST'>"
-                        . "<button type='submit' class='btn '>"
+                        echo "<div style='margin-left: 98vh;'><form action='Pedidos.php' method='POST'>"
+                        . "<button type='submit' class='btn'>"
                                 . "<img src='imagens/Pedidos.png' alt='Pedidos' class='border border-dark rounded-lg' width='30' height='30'/>"
                                 . " Pedidos"
                         . "</button>"
+                        . "</form></div>"
+                        . "<form action='Membros.php' method='POST'>"
+                        . "<button type='submit' class='btn'>"
+                        . "<img src='imagens/Membros.png' alt='Membros' class='border border-dark rounded-lg' width='30' height='30'/>"
+                        . " Membros</button></form>'";
+                        if($usuario[0]['cargo']==3){
+                            echo "<form action='settingCom.php' method='POST'>"
+                        . "<button type='submit' class='btn'>"
+                                . "<img src='imagens/settings.png' alt='Configurações' class='border border-dark rounded-lg' width='30' height='30'/>"
+                        . "</button>"
                         . "</form>";
-                    }
-
+                        }
+                    }else{
+                        echo "<div style='margin-left: 110vh;'>";
+                        
                 ?>
+                
                 <form action='Membros.php' method='POST'>
                     <button type="submit" class="btn">
                         <img src='imagens/Membros.png' alt="Membros" class="border border-dark rounded-lg" width="30" height="30"/>
                         Membros
                     </button>
-                </form>    
+                </form>
+                <?php 
+                echo '</div>';
+                if(count($a)>0 && $_SESSION['login']==true && $usuario[0]['cargo']==3){
+                    echo "<form action='#' method='POST'>"
+                    . "<button type='submit' class='btn'>"
+                        . "<img src='imagens/settings.png' alt='Configurações' class='border border-dark rounded-lg' width='30' height='30'/>"
+                    . "</button>"
+                    . "</form>";
+                    }
+                }
+                ?>
             </div>
             
             
-            <ul class="list-group rounded-sm" style="width:100%;">
+            <ul class="list-group rounded-sm" style="width:100%;display: table;">
                     <?php
                         for($e = 0; $e < count($post);$e++){
                             $userPost = $post[$e];
                             $Postado = executarSelect($con, "SELECT * FROM Usuario WHERE idUsuario={$userPost['usuario']}");
                             $feedback = executarSelect($con, "SELECT * FROM feedback WHERE idPost={$userPost['idPost']}");
                             echo "<div class='media'>"
-                            . "<li class='list-group-item text-center' style='height: 6vw;background-color: whitesmoke;'>"
+                            . "<li class='list-group-item text-center' style='display: table-cell;height: 6vw;background-color: whitesmoke;'>"
                                 . "<form action='indexCom.php' method='POST' name='Feedback' id='form'>"
                                         . "<button type='submit' name='Feedback' class='btn dropdown-item' value=1>"
                                                 . "<img src='imagens/Seta_Para_Cima.png' alt='Pedidos' class='' width='20px' height='20px'/>"
@@ -89,10 +119,13 @@ $usuario = executarSelect($con, "SELECT DISTINCT cargo FROM Usuario_has_Comunida
                                 . "</form>"
                             . "</li>"
                             . "<li class='list-group-item text-left border' style='height: 6vw;width:100%;'>";
-                            echo "<div class='mt-n2 Post' style='width: 45vw;'>"
+                            echo "<div class='Post' style='width: 45vw;'>"
                                     . "<strong>{$userPost['title']}</strong>"
-                                    . "<p><small class='text-muted'>Postado por {$Postado[0]['apelido']}</small>"
-                            . "</div></div></li>";  
+                                    . "<div class='mt-5'>"
+                                    . "<p><small class='text-muted '>Postado por "
+                                    . "<img src={$Postado[0]['foto_usuario']} alt='Configurações' class='rounded-circle' width='20' height='20'/>"
+                                    . " {$Postado[0]['apelido']}</small></div>"
+                            . "</div></div></li>"; 
                         }
                     ?>
                 </ul>

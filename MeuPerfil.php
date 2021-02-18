@@ -23,6 +23,7 @@ if(isset($_POST['Enviar'])){
     move_uploaded_file($nomeFotoTemp, "upload/$nomeFotoRenomeada");
     
     executarUpdate($con, "UPDATE Usuario SET foto_usuario='upload/$nomeFotoRenomeada' WHERE idUsuario={$_SESSION['log']}");
+    header('location:MeuPerfil.php');
 }
 ?>
 <main class="container mt-5">
@@ -44,18 +45,20 @@ if(isset($_POST['Enviar'])){
                     <div class="conteiner-sm form-group p-2 border">
                         <?= $dados[0]['apelido'] ?>
                    </div>
-                    <a class="p-2" href="#.php">Mudar Apelido</a>
+                    <a class="p-2" href="Apelido.php">Mudar Apelido</a>
                     <br><br>
 
                     Email:
                     <div class="conteiner-sm form-group p-2 border">
                         <?= $dados[0]["email"]?>
                     </div>
-                    <a class="p-2" href="#.php">Mudar Email</a>
+                    <a class="p-2" href="Email.php">Mudar Email</a>
                     <br><br>
+                    
                 </div>
-                <form action="MeuPerfil.php" method="POST">
-                    <button onclick="return confirm('Você tem certeza que deseja excluir sua conta?')" type="submit" class="btn btn-danger " name="Excluir" value=1 style="margin-left: 75%;">Excluir minha conta</button>
+                <form action="MeuPerfil.php" method="POST" style="width: 100%;">
+                    <button type="submit" class="btn btn-primary ml-3" formaction="Senha.php">Mudar minha senha</button>
+                    <button onclick="return confirm('Você tem certeza que deseja excluir sua conta?')" type="submit" class="btn btn-danger" name="Excluir" value=1 style="margin-left: 49%;">Excluir minha conta</button>
                 </form>
             </div>
 

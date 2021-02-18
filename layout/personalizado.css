@@ -13,6 +13,10 @@ body{
     background-size: cover;
    
 }
+.disabled {
+  pointer-events: none;
+  cursor: default;
+}
 .estilo_card_inicio1{
      display: inline-block;
      width:25vw;

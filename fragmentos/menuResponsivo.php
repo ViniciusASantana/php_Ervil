@@ -48,8 +48,11 @@ $dados = executarSelect($con, "SELECT DISTINCT * FROM Comunidade,Usuario_has_Com
                     <small class="p-3">Sumario</small>
                     <a class="dropdown-item" href="Comunidades.php">Encontrar</a>
                     <a class="dropdown-item" href="#.php">Populares</a>
-                    <a class="dropdown-item" href="ComuniCriacao.php">Criar</a>
                     <?php
+                    if($_SESSION['login']==true)
+                    echo "<a class='dropdown-item' href='ComuniCriacao.php'>Criar</a>";
+                    else echo "<a class='dropdown-item disabled' href='ComuniCriacao.php'>Criar</a>";
+                    
                     for ($i = 0; $i < count($dados); $i++) {
                         $seguindo = $dados[$i];
                         if ($i == 0) {

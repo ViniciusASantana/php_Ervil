@@ -34,7 +34,7 @@ $ver = executarSelect($con, "SELECT DISTINCT * FROM Usuario_has_Comunidade,Comun
             <h2><strong>Comunidades</strong></h2>
             <br>
         <!-- uma boa pratica de organizacao - coloque uma div para agrupar o label e o input -->   
-        <ul class="list-group px-4">
+        <ul class="list-group px-4 d-flex">
             <?php
                 for($e = 0; $e < count($dados);$e++){
                     $com=$dados[$e];
@@ -45,8 +45,7 @@ $ver = executarSelect($con, "SELECT DISTINCT * FROM Usuario_has_Comunidade,Comun
                     . "<a class='px-5'><img src={$com["foto_Comunidade"]} alt='Imagem da Comunidade' class='border border-dark rounded-circle' width='120rem' height='120rem'/></a>"
                     . "<div class='form-group col'>";
                     if($com["categoria"]==0){
-                        echo "<button type='submit' class='btn' formaction='indexCom.php' value='{$com['idComunidade']}' name='Visual' value='{$com['idComunidade']}'>"
-                        . "<h5>{$com['nome']}</button>";
+                        echo "<h5>{$com['nome']}";
                     }else echo "<h5>{$com['nome']}";
                             
                     if($com["categoria"]==1){
@@ -56,11 +55,18 @@ $ver = executarSelect($con, "SELECT DISTINCT * FROM Usuario_has_Comunidade,Comun
                         if($com["topico"]!=null)    echo "<p><small class='btn-danger rounded-pill px-2 topicos'>{$com["topico"]}</small>";
                         echo "<small class='pl-3'>{$count[0]['usuario_idUsuario']} Participantes</small>";
                         if($com["descricao"]!=null)    echo "<p><textarea class='descricao'> {$com["descricao"]}</textarea>";
-                    echo "</div>"
-                    . ""
-                    . "<br><br><br><br><button type='submit' class='btn btn-info partic' name='Participar' value='{$com['idComunidade']}'>Participar</button></div>"
-                    . "<input type='hidden' name='categoria' value='{$com['categoria']}'>" 
-                    . "</form>"
+                    echo "</div>";
+                    if($com["categoria"]==0){
+                    echo "<button type='submit' class='btn btn-info partic mr-1' formaction='indexCom.php' value='{$com['idComunidade']}' name='Visual' value='{$com['idComunidade']}'/>Visualizar</button>";
+                    }
+                    if($_SESSION['login']==false){
+                            echo "<button type='submit' class='btn btn-info partic' name='Participar' value='{$com['idComunidade']}' disabled>Participar</button>";
+                        
+                    } else{
+                        echo "<button type='submit' class='btn btn-info partic' name='Participar' value='{$com['idComunidade']}'>Participar</button></div>"
+                    . "<input type='hidden' name='categoria' value='{$com['categoria']}'>";
+                    }
+                    echo "</form>"
                     . "</li>";  
                     }
                     

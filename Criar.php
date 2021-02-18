@@ -31,7 +31,7 @@ $comunidade= executarSelect($con, "SELECT * FROM Comunidade WHERE idComunidade={
         <div class="p-4 d-flex align-content-center" style="background-color: whitesmoke;">
             <form action="Criar.php" method="POST">
                 <div class="form-group col">
-                    <input type="text" class="form-control" name="title" placeholder=" Título" required>
+                    <input type="text" class="form-control" name="title" maxlength="80" placeholder=" Maxímo de 80 caracteres" required>
                 </div>
                 
                 <textarea name="conteudo" id="criar"  maxlength=400 placeholder=" Conteúdo da postagem" required=""></textarea>
