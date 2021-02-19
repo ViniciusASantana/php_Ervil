@@ -57,7 +57,6 @@ $dados = executarSelect($con, "SELECT DISTINCT * FROM Comunidade,Usuario_has_Com
                 <div class="dropdown-menu"  aria-labelledby="submenu1">
                     <small class="p-3">Sumario</small>
                     <a class="dropdown-item" href="Comunidades.php">Encontrar</a>
-                    <a class="dropdown-item" href="#.php">Populares</a>
                     <?php
                     if($_SESSION['login']==true)
                     echo "<a class='dropdown-item' href='ComuniCriacao.php'>Criar</a>";
@@ -79,11 +78,10 @@ $dados = executarSelect($con, "SELECT DISTINCT * FROM Comunidade,Usuario_has_Com
             
 <?php
 if ($_SESSION['login'] == true) {
-    echo 
-    "<li class='nav-item' id='Logado' style='margin-left: 76vw;'>"
+    echo "<li class='nav-item' id='Logado' style='margin-left:77vw;'>"
     . "<a class='nav-link text-white' href='MeuPerfil.php'>Perfil</a> "
     . "</li>"
-    . "<li class='nav-item'>"
+    . "<li class='nav-item '>"
     . "<form actiom='menuResponsivo.php' method='POST'>"
     . "<button type='submit' class='btn text-white' id='sair' value='false' name='sair'>Sair</button>"
     . "</form>"

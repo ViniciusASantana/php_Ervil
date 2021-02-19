@@ -4,12 +4,25 @@ include 'fragmentos/cabecalho.php';
 include 'fragmentos/menuResponsivo.php';
 
 conectarBanco();
+if(isset($_POST['comID'])){
+    $_SESSION['comID'] = $_POST['comID'];
+}
+
+if(isset($_POST['Visual'])){
+    $_SESSION['comID'] = $_POST['Visual'];
+}
+
 
 $usuario = executarSelect($con, "SELECT DISTINCT cargo FROM Usuario_has_Comunidade where comunidade_idComunidade={$_SESSION['comID']} and cargo>0 and usuario_idUsuario={$_SESSION['log']}");
 $post = executarSelect($con, "SELECT * FROM Postagem WHERE idComunidade={$_SESSION['comID']} ORDER BY data_post DESC");
 $all = executarSelect($con, "SELECT * FROM Comunidade where idComunidade={$_SESSION['comID']}");
 $count = executarSelect($con, "SELECT COUNT(*) as usuario_idUsuario FROM Usuario_has_Comunidade WHERE comunidade_idComunidade = {$_SESSION['comID']} AND cargo>0");
 $a = executarSelect($con, "SELECT DISTINCT cargo FROM Usuario_has_Comunidade where comunidade_idComunidade={$_SESSION['comID']} and usuario_idUsuario={$_SESSION['log']}");
+
+if(isset($_POST['populares'])){
+    $post = executarSelect($con, "SELECT * FROM Postagem WHERE idComunidade={$_SESSION['comID']} ORDER BY feedback DESC");
+}
+
 if(isset($_POST['Feedback'])){
     if(count($a)>0 && $_SESSION['login']==true ){
         $valor = $_POST['Feedback'];
@@ -27,13 +40,7 @@ if(isset($_POST['Feedback'])){
         header('location:IndexCom.php'); //Somente para "forçar" a atualização da página
     }
 }
-if(isset($_POST['comID'])){
-    $_SESSION['comID'] = $_POST['comID'];
-}
 
-if(isset($_POST['Visual'])){
-    $_SESSION['comID'] = $_POST['Visual'];
-}
 
 if(isset($_POST['deixarCom'])){
     mysqli_query($con, "DELETE FROM Usuario_has_Comunidade WHERE usuario_idUsuario={$_SESSION['log']} AND comunidade_idComunidade={$_SESSION['comID']}");
@@ -54,9 +61,7 @@ if(isset($_POST['deixarCom'])){
     }
     
 }
-if(isset($_POST['populares'])){
-    $post = executarSelect($con, "SELECT * FROM Postagem WHERE idComunidade={$_SESSION['comID']} ORDER BY feedback DESC");
-}
+
 ?>
 <main class="container-fluid">
     <div class="row" style="margin-top: -25px;background-color: blue;height: 8vh;">
@@ -80,12 +85,12 @@ if(isset($_POST['populares'])){
                 <?php 
                     if(count($a)>0 && $_SESSION['login']==true && $usuario[0]['cargo']==2 && $all[0]['categoria']==1 || count($a)>0 && $_SESSION['login']==true && $usuario[0]['cargo']==3 && $all[0]['categoria']==1){
 
-                        echo "<div style='width: 37.2%;'><form action='Pedidos.php' method='POST' class='text-right'>"
+                        echo "<form action='Pedidos.php' method='POST' class='text-right'>"
                         . "<button type='submit' class='btn'>"
                                 . "<img src='imagens/Pedidos.png' alt='Pedidos' class='border border-dark rounded-lg' width='30' height='30'/>"
                                 . " Pedidos"
                         . "</button>"
-                        . "</form></div>"
+                        . "</form>"
                         . "<form action='Membros.php' method='POST' class='text-right'>"
                         . "<button type='submit' class='btn'>"
                         . "<img src='imagens/Membros.png' alt='Membros' class='border border-dark rounded-lg' width='30' height='30'/>"
@@ -98,18 +103,18 @@ if(isset($_POST['populares'])){
                         . "</form>";
                         }
                     }else{
-                        echo "<div style='margin-left: 54vh;'>";
+                        echo "<div style='margin-left: 55vh;'>";
                         
                 ?>
                 
                 <form action='Membros.php' method='POST'>
                     <button type="submit" class="btn">
-                        <img src='imagens/Membros.png' alt="Membros" class="border border-dark rounded-lg" width="30" height="30"/>
+                        <img src="imagens/Membros.png" alt="Membros" class="border border-dark rounded-lg" width="30" height="30"/>
                         Membros
                     </button>
                 </form>
                 <?php 
-                echo '</div>';
+                echo "</div>";
                 if(count($a)>0 && $_SESSION['login']==true && $usuario[0]['cargo']==3){
                     echo "<form action='settingCom.php' method='POST'>"
                     . "<button type='submit' class='btn'>"
@@ -187,6 +192,8 @@ if(isset($_POST['populares'])){
             ?>
         </div>
     </div>
+    
+
 </main>
 <?php
     desconectarBanco($con);

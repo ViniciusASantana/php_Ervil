@@ -9,8 +9,7 @@ include 'fragmentos/menuResponsivo.php';
 
 <main class="container mt-4">
 <!--    <div class="">-->
-    <link href='https://fonts.googleapis.com/css?family=EB Garamond' rel='stylesheet' > 
-    <style> body { font-family: 'EB Garamond';font-size: 22px; } </style> 
+
     <div class="media" style="width: 118%;" id="estilo-borda-comunidade">
 
         <!-- uma boa pratica de organizacao - coloque uma div para agrupar o label e o input -->

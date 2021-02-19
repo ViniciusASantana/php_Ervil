@@ -31,8 +31,6 @@ $ver = executarSelect($con, "SELECT DISTINCT * FROM Usuario_has_Comunidade,Comun
 
 <main class="container mt-5">
         <div class="corpo">
-            <link href='https://fonts.googleapis.com/css?family=EB Garamond' rel='stylesheet' > 
-            <style> body { font-family: 'EB Garamond';font-size: 22px; } </style> 
             <h2><strong>Comunidades</strong></h2>
             <br>
         <!-- uma boa pratica de organizacao - coloque uma div para agrupar o label e o input -->   

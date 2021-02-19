@@ -8,10 +8,8 @@ include 'fragmentos/menuResponsivo.php';
 <main class="container">
 
     <!-- jumbotron eh como se fosse um banner -->
-    <link href='https://fonts.googleapis.com/css?family=EB Garamond' rel='stylesheet' > 
-        <style> body { font-family: 'EB Garamond';font-size: 22px; } </style> 
 
-        <div class="estilo-borda-inicio">  
+    <div class="estilo-borda-inicio">  
             <div class="jumbotron bg-transparent">
 
                 <h1 id="estilo-titulo" class="text-white"> Ervil</h1>
