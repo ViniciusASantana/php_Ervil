@@ -13,8 +13,7 @@ include 'fragmentos/menuResponsivo.php';
     <div class="jumbotron bg-warning">
         <h1 id="titulo-seguranca"> Atenção </h1>
         <h3> Segundo as directrizes do site, todo e qualquer tipo de conteúdo 
-        inapropriado é  terminantemente proibido. Aquele(a) que  violar  essa clausula
-        sera expulso(a) do site.</h3>
+        inapropriado é  terminantemente proibido.</h3>
     </div>    
     
 </main>

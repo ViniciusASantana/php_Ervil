@@ -23,7 +23,7 @@ if(isset($_POST['populares'])){
     $post = executarSelect($con, "SELECT * FROM Postagem WHERE idComunidade={$_SESSION['comID']} ORDER BY feedback DESC");
 }
 
-$all = executarSelect($con, "SELECT DISTINCT * FROM Comunidade where idComunidade={$_SESSION['comID']}");
+$all = executarSelect($con, "SELECT * FROM Comunidade where idComunidade={$_SESSION['comID']}");
 $count = executarSelect($con, "SELECT COUNT(*) as usuario_idUsuario FROM Usuario_has_Comunidade WHERE comunidade_idComunidade = {$_SESSION['comID']} AND cargo>0");
 
 $a = executarSelect($con, "SELECT DISTINCT cargo FROM Usuario_has_Comunidade where comunidade_idComunidade={$_SESSION['comID']} and usuario_idUsuario={$_SESSION['log']}");
@@ -46,7 +46,18 @@ if(isset($_POST['Feedback'])){
 }
 $usuario = executarSelect($con, "SELECT DISTINCT cargo FROM Usuario_has_Comunidade where comunidade_idComunidade={$_SESSION['comID']} and cargo>0 and usuario_idUsuario={$_SESSION['log']}");
 ?>
-<main class="container-fluid mt-5">
+<main class="container-fluid">
+    <div class="row" style="margin-top: -25px;background-color: blue;height: 8vh;">
+    </div>
+    <div class="mb-4 row" style="height: 7vh;background-color: whitesmoke;">
+        <div class="ml-5 d-flex ">
+            <div class=" align-items-center" style="margin-top: -2vh;">
+            <img src=<?= $all[0]['foto_Comunidade'] ?> alt="Imagem da Comunidade" class="border border-light rounded-circle" width="80rem" height="80rem" style="border-width: 250px;"/>
+            </div>
+        <span class="ml-3 mt-3" ><h4 class="font-weight-bold"><?= $all[0]['nome'] ?></h4></span>
+        </div>
+        </div>
+    
     <div class='media' style="width: 100%;">
         <div class="mx-auto" style="width: 80%;">
             <div class="d-flex conteiner-sm form-group p-2 border">
@@ -88,7 +99,7 @@ $usuario = executarSelect($con, "SELECT DISTINCT cargo FROM Usuario_has_Comunida
                 <?php 
                 echo '</div>';
                 if(count($a)>0 && $_SESSION['login']==true && $usuario[0]['cargo']==3){
-                    echo "<form action='#' method='POST'>"
+                    echo "<form action='settingCom.php' method='POST'>"
                     . "<button type='submit' class='btn'>"
                         . "<img src='imagens/settings.png' alt='Configurações' class='border border-dark rounded-lg' width='30' height='30'/>"
                     . "</button>"
@@ -119,13 +130,14 @@ $usuario = executarSelect($con, "SELECT DISTINCT cargo FROM Usuario_has_Comunida
                                 . "</form>"
                             . "</li>"
                             . "<li class='list-group-item text-left border' style='height: 6vw;width:100%;'>";
-                            echo "<div class='Post' style='width: 45vw;'>"
-                                    . "<strong>{$userPost['title']}</strong>"
-                                    . "<div class='mt-5'>"
+                            echo "<form action='Postagem.php' method='POST' name='Postagem' id='form' style='width: 45vw;'>"
+                                    . "<input class='btn font-weight-bold' href='Postagem.php' type='submit' name='title' id='title' Value='{$userPost['title']}'/>"
+                                    . "<input type='hidden' value='{$userPost['idPost']}' name='idPost'>"
+                                    . "<div class='mt-4'>"
                                     . "<p><small class='text-muted '>Postado por "
                                     . "<img src={$Postado[0]['foto_usuario']} alt='Configurações' class='rounded-circle' width='20' height='20'/>"
                                     . " {$Postado[0]['apelido']}</small></div>"
-                            . "</div></div></li>"; 
+                            . "</div></form></li>"; 
                         }
                     ?>
                 </ul>
