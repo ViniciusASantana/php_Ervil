@@ -4,11 +4,14 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/xampp/htdocs/Ervil/indexCom.php</file>
-            <file>file:/C:/xampp/htdocs/Ervil/MeuPerfil.php</file>
             <file>file:/C:/xampp/htdocs/Ervil/Senha.php</file>
+            <file>file:/C:/xampp/htdocs/Ervil/fragmentos/menuResponsivo.php</file>
+            <file>file:/C:/xampp/htdocs/Ervil/Postagem.php</file>
             <file>file:/C:/xampp/htdocs/Ervil/Criar.php</file>
+            <file>file:/C:/xampp/htdocs/Ervil/layout/personalizado.css</file>
+            <file>file:/C:/xampp/htdocs/Ervil/fragmentos/cabecalho.php</file>
             <file>file:/C:/xampp/htdocs/Ervil/Comunidades.php</file>
-            <file>file:/C:/xampp/htdocs/Ervil/settingCom.php</file>
+            <file>file:/C:/xampp/htdocs/Ervil/MembrosButtons.php</file>
         </group>
     </open-files>
 </project-private>
