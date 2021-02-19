@@ -87,7 +87,7 @@ if(isset($_POST['populares'])){
                         . "</form>";
                         }
                     }else{
-                        echo "<div style='margin-left: 60vh;'>";
+                        echo "<div style='margin-left: 54vh;'>";
                         
                 ?>
                 
