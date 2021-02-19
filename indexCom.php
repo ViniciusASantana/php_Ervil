@@ -61,23 +61,23 @@ $usuario = executarSelect($con, "SELECT DISTINCT cargo FROM Usuario_has_Comunida
     <div class='media' style="width: 100%;">
         <div class="mx-auto" style="width: 80%;">
             <div class="d-flex conteiner-sm form-group p-2 border">
-                <form action="indexCom.php" method="POST" class="ml-1">
+                <form action="indexCom.php" method="POST" class="ml-1" style="width: 50%;">
                     <input type="submit" value="Recentes" name="recentes" class="btn btn-outline-primary"/>
                     <input type="submit" value="Populares" name="populares" class="btn btn-outline-primary"/>
                 </form>
                 <?php 
                     if(count($a)>0 && $_SESSION['login']==true && $usuario[0]['cargo']==2 && $all[0]['categoria']==1 || count($a)>0 && $_SESSION['login']==true && $usuario[0]['cargo']==3 && $all[0]['categoria']==1){
 
-                        echo "<div style='margin-left: 98vh;'><form action='Pedidos.php' method='POST'>"
+                        echo "<div style='width: 37.2%;'><form action='Pedidos.php' method='POST' class='text-right'>"
                         . "<button type='submit' class='btn'>"
                                 . "<img src='imagens/Pedidos.png' alt='Pedidos' class='border border-dark rounded-lg' width='30' height='30'/>"
                                 . " Pedidos"
                         . "</button>"
                         . "</form></div>"
-                        . "<form action='Membros.php' method='POST'>"
+                        . "<form action='Membros.php' method='POST' class='text-right'>"
                         . "<button type='submit' class='btn'>"
                         . "<img src='imagens/Membros.png' alt='Membros' class='border border-dark rounded-lg' width='30' height='30'/>"
-                        . " Membros</button></form>'";
+                        . " Membros</button></form>";
                         if($usuario[0]['cargo']==3){
                             echo "<form action='settingCom.php' method='POST'>"
                         . "<button type='submit' class='btn'>"
@@ -86,7 +86,7 @@ $usuario = executarSelect($con, "SELECT DISTINCT cargo FROM Usuario_has_Comunida
                         . "</form>";
                         }
                     }else{
-                        echo "<div style='margin-left: 110vh;'>";
+                        echo "<div style='margin-left: 60vh;'>";
                         
                 ?>
                 
