@@ -54,7 +54,7 @@ $usuario = executarSelect($con, "SELECT DISTINCT cargo FROM Usuario_has_Comunida
             <div class=" align-items-center" style="margin-top: -2vh;">
             <img src=<?= $all[0]['foto_Comunidade'] ?> alt="Imagem da Comunidade" class="border border-light rounded-circle" width="80rem" height="80rem" style="border-width: 250px;"/>
             </div>
-        <span class="ml-3 mt-3" ><h4 class="font-weight-bold"><?= $all[0]['nome'] ?></h4></span>
+        <span class="ml-3 mt-2" ><h4 class="font-weight-bold"><?= $all[0]['nome'] ?></h4></span>
         </div>
         </div>
     
