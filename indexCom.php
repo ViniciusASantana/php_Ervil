@@ -41,7 +41,18 @@ if(isset($_POST['deixarCom'])){
     if($count[0]['usuario_idUsuario']==0){
         mysqli_query($con, "DELETE FROM Comunidade WHERE idComunidade={$_SESSION['comID']}");
     }
-    header('location:Comunidades.php');
+    if($a[0]['cargo']=3){
+        $countD = executarSelect($con, "SELECT COUNT(*) as usuario_idUsuario FROM Usuario_has_Comunidade WHERE comunidade_idComunidade = {$_SESSION['comID']} AND cargo=3");
+        
+        if($countD[0]['usuario_idUsuario']==0 || !empty($countD[0]['usuario_idUsuario'])){
+            $novDono = executarSelect($con, "SELECT * FROM Usuario_has_Comunidade where comunidade_idComunidade={$_SESSION['comID']} and cargo>0 ORDER BY cargo DESC");
+            
+            if(!empty($novDono)){
+                executarUpdate($con, "UPDATE Usuario_has_Comunidade SET cargo=3 WHERE usuario_idUsuario={$novDono[0]['usuario_idUsuario']} and comunidade_idComunidade = {$_SESSION['comID']}");
+            }
+        }
+    }
+    
 }
 if(isset($_POST['populares'])){
     $post = executarSelect($con, "SELECT * FROM Postagem WHERE idComunidade={$_SESSION['comID']} ORDER BY feedback DESC");
