@@ -5,27 +5,10 @@ include 'fragmentos/menuResponsivo.php';
 
 conectarBanco();
 
-if(isset($_POST['comID'])){
-    $_SESSION['comID'] = $_POST['comID'];
-}
-
-if(isset($_POST['Visual'])){
-    $_SESSION['comID'] = $_POST['Visual'];
-}
-
-if(isset($_POST['deixarCom'])){
-    mysqli_query($con, "DELETE FROM Usuario_has_Comunidade WHERE usuario_idUsuario={$_SESSION['log']} AND comunidade_idComunidade={$_SESSION['comID']}");
-    header('location:Comunidades.php');
-}
+$usuario = executarSelect($con, "SELECT DISTINCT cargo FROM Usuario_has_Comunidade where comunidade_idComunidade={$_SESSION['comID']} and cargo>0 and usuario_idUsuario={$_SESSION['log']}");
 $post = executarSelect($con, "SELECT * FROM Postagem WHERE idComunidade={$_SESSION['comID']} ORDER BY data_post DESC");
-
-if(isset($_POST['populares'])){
-    $post = executarSelect($con, "SELECT * FROM Postagem WHERE idComunidade={$_SESSION['comID']} ORDER BY feedback DESC");
-}
-
 $all = executarSelect($con, "SELECT * FROM Comunidade where idComunidade={$_SESSION['comID']}");
 $count = executarSelect($con, "SELECT COUNT(*) as usuario_idUsuario FROM Usuario_has_Comunidade WHERE comunidade_idComunidade = {$_SESSION['comID']} AND cargo>0");
-
 $a = executarSelect($con, "SELECT DISTINCT cargo FROM Usuario_has_Comunidade where comunidade_idComunidade={$_SESSION['comID']} and usuario_idUsuario={$_SESSION['log']}");
 if(isset($_POST['Feedback'])){
     if(count($a)>0 && $_SESSION['login']==true ){
@@ -44,7 +27,25 @@ if(isset($_POST['Feedback'])){
         header('location:IndexCom.php'); //Somente para "forçar" a atualização da página
     }
 }
-$usuario = executarSelect($con, "SELECT DISTINCT cargo FROM Usuario_has_Comunidade where comunidade_idComunidade={$_SESSION['comID']} and cargo>0 and usuario_idUsuario={$_SESSION['log']}");
+if(isset($_POST['comID'])){
+    $_SESSION['comID'] = $_POST['comID'];
+}
+
+if(isset($_POST['Visual'])){
+    $_SESSION['comID'] = $_POST['Visual'];
+}
+
+if(isset($_POST['deixarCom'])){
+    mysqli_query($con, "DELETE FROM Usuario_has_Comunidade WHERE usuario_idUsuario={$_SESSION['log']} AND comunidade_idComunidade={$_SESSION['comID']}");
+    $count = executarSelect($con, "SELECT COUNT(*) as usuario_idUsuario FROM Usuario_has_Comunidade WHERE comunidade_idComunidade = {$_SESSION['comID']} AND cargo>0");
+    if($count[0]['usuario_idUsuario']==0){
+        mysqli_query($con, "DELETE FROM Comunidade WHERE idComunidade={$_SESSION['comID']}");
+    }
+    header('location:Comunidades.php');
+}
+if(isset($_POST['populares'])){
+    $post = executarSelect($con, "SELECT * FROM Postagem WHERE idComunidade={$_SESSION['comID']} ORDER BY feedback DESC");
+}
 ?>
 <main class="container-fluid">
     <div class="row" style="margin-top: -25px;background-color: blue;height: 8vh;">

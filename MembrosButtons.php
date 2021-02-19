@@ -10,8 +10,6 @@ $_SESSION['Membros_button']= $_POST['Membros_button'];
 
 
 
-print_r($_SESSION['ButtonUserID']);
-print_r($_SESSION['comID']);
 
 switch ($_SESSION['Membros_button']){
     case 0: header('location:Reporte.php');break;
@@ -20,7 +18,11 @@ switch ($_SESSION['Membros_button']){
         header('location:Membros.php');break;
     }
     case 2: {
-        mysqli_query($con, "DELETE FROM Usuario_has_Comunidade WHERE usuario_idUsuario={$_SESSION['ButtonUserID']} AND comunidade_idComunidade={$_SESSION['comID']} AND cargo<3");
+        mysqli_query($con, "DELETE FROM Usuario_has_Comunidade WHERE usuario_idUsuario={$_SESSION['ButtonUserID']} AND comunidade_idComunidade={$_SESSION['comID']} AND cargo<3 AND usuario_idUsuario!={$_SESSION['log']}");
+        $count = executarSelect($con, "SELECT COUNT(*) as usuario_idUsuario FROM Usuario_has_Comunidade WHERE comunidade_idComunidade = {$_SESSION['comID']} AND cargo>0");
+        if($count[0]['usuario_idUsuario']==0){
+        mysqli_query($con, "DELETE FROM Comunidade WHERE idComunidade={$_SESSION['comID']}");
+        }
         header('location:Membros.php');break;
         }
     case 3: {
