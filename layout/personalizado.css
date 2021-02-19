@@ -1,6 +1,5 @@
 
 /* estilo pelo nome da tag */
-
 * { 
     margin: 0;
     padding: 0;
@@ -12,6 +11,7 @@ html {
 body {
     min-height: 100%;
 }
+
 body{
     margin-bottom: 20px;
     background-image: url("../imagens/imagem3.jpg");
@@ -25,7 +25,6 @@ body{
     background-size: cover;
    
 }
-
 .disabled {
   pointer-events: none;
   cursor: default;
@@ -169,4 +168,30 @@ nav{
 #estilo-texto-inicio{
      text-align: center;
    
+}
+.estilo-borda-inicio{
+ border: 4px solid white; 
+ margin-top: 100px;
+ margin-bottom: 100px;
+}
+#estilo-letra-rodape{
+    display: inline-block;
+}
+#imagem{
+    
+      height: 3vw;
+    width: 5.5vw;
+    
+}
+#estilo-borda-comunidade{
+    
+ border: 10px solid white; 
+ margin-top: 100px;
+ margin-bottom: 100px;
+ padding: 50px;
+    
+}
+.estilo-topico-seguranca{
+    border-left: 6px solid royalblue;
+  background-color: lightgrey;
 }

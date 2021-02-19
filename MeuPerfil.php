@@ -27,7 +27,7 @@ if(isset($_POST['Enviar'])){
 }
 ?>
 <main class="container mt-5">
-    <div class="media" style="width: 100%;">
+    <div class="media" style="width: 100%;" id="estilo-borda-comunidade">
         <div class="d-flex" style="width: 100%;">
             <div class="p-3 rounded-sm mx-auto" style="background-color: white;border-radius: 20px;width: 30%;height: auto;">
                 <div class="text-center">

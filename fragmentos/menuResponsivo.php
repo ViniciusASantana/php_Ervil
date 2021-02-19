@@ -27,24 +27,34 @@ $dados = executarSelect($con, "SELECT DISTINCT * FROM Comunidade,Usuario_has_Com
     }
 </style>
 
-<nav class="navbar navbar-expand-lg navbar-light bg-warning border border-light">
+
+<nav class="navbar navbar-expand-lg navbar-light bg-dark border border-light ">
     <a class="navbar-brand" href="index.php">
-        <strong><h1>Ervil</h1></strong>
+  
+        <div class="text-white">
+            <h1>Ervil</h1>
+        </div>
+        
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#meuMenu" aria-controls="meuMenu" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="meuMenu">
         <ul class="navbar-nav">
-            <li class="nav-item ">
-                <a class="nav-link" href="index.php">Inicio</a>
-            </li>
-
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="submenu1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Comunidade
+            
+               
+                    <a class="nav-link" href="index.php" > 
+                    <div class="text-white">Inicio</div>
+                    </a>
+               
+            
+            <li class="nav-item dropdown" >
+               
+                <a class="nav-link dropdown-toggle"  href="#" id="submenu1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" > 
+                    <div class="text-white" id="estilo-letra-rodape">Comunidade</div>
+                   
                 </a>
-                <div class="dropdown-menu" aria-labelledby="submenu1">
+                <div class="dropdown-menu"  aria-labelledby="submenu1">
                     <small class="p-3">Sumario</small>
                     <a class="dropdown-item" href="Comunidades.php">Encontrar</a>
                     <a class="dropdown-item" href="#.php">Populares</a>
@@ -66,18 +76,20 @@ $dados = executarSelect($con, "SELECT DISTINCT * FROM Comunidade,Usuario_has_Com
                     ?>
                 </div>
             </li>
+            
 <?php
 if ($_SESSION['login'] == true) {
-    echo "<li class='nav-item' id='Logado' style='margin-left: 76vw;'>"
-    . "<a class='nav-link' href='MeuPerfil.php'>Perfil</a> "
+    echo 
+    "<li class='nav-item' id='Logado' style='margin-left: 76vw;'>"
+    . "<a class='nav-link text-white' href='MeuPerfil.php'>Perfil</a> "
     . "</li>"
     . "<li class='nav-item'>"
     . "<form actiom='menuResponsivo.php' method='POST'>"
-    . "<button type='submit' class='btn' id='sair' value='false' name='sair'>Sair</button>"
+    . "<button type='submit' class='btn text-white' id='sair' value='false' name='sair'>Sair</button>"
     . "</form>"
     . "</li>";
 } else {
-    echo "<li class='nav-item'><a class='nav-link' href='Login.php'><strong style='margin-left: 78vw;'>Entrar</strong></a></li>";
+    echo "<li class='nav-item'><a class='nav-link text-white' href='Login.php'><strong style='margin-left: 78vw;'>Entrar</strong></a></li>";
 }
 ?>
 
