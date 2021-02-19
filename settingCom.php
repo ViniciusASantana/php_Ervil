@@ -34,7 +34,12 @@ if(isset($_POST['Enviar'])){
 
 <main class="container mt-5">
     <div class="" style="padding: 20px;background-color: white;border-radius: 5px;">
-        <h2><strong>Configurações</strong></h2>
+        <div class="d-flex">
+            <h2><strong>Configurações</strong></h2>
+            <div class="text-right" style="width: 100%;">
+                <h2 class='text-muted'>ID: <?= $com[0]['idComunidade'] ?></h2>
+            </div>
+        </div>
         <br> 
         <div class="d-flex">
             <div class="p-3 rounded-sm " style="width: auto;height: auto;">

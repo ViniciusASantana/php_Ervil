@@ -68,7 +68,7 @@ if(isset($_POST['Feedback'])){
                 <div class="mx-2 mb-3 px-5" style="width: auto;">
                 <strong><?= $post[0]['title'] ?></strong>
                 <br><br>
-                <?= $post[0]['conteudo'] ?>
+                <?= wordwrap($post[0]['conteudo'],73,"<br>\n",true)  ?> //Sei que não foi ensinado, mas pqp, como vou fazer um SITE DE POSTAGENS sem QUEBRA LINHA?
                 </div>
         </div>
         <div class="ml-4 p-4 media-body align-content-center border" style="width: 30%;">

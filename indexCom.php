@@ -17,7 +17,7 @@ if(isset($_POST['deixarCom'])){
     mysqli_query($con, "DELETE FROM Usuario_has_Comunidade WHERE usuario_idUsuario={$_SESSION['log']} AND comunidade_idComunidade={$_SESSION['comID']}");
     header('location:Comunidades.php');
 }
-$post = executarSelect($con, "SELECT * FROM Postagem WHERE idComunidade={$_SESSION['comID']} ORDER BY data_post ASC");
+$post = executarSelect($con, "SELECT * FROM Postagem WHERE idComunidade={$_SESSION['comID']} ORDER BY data_post DESC");
 
 if(isset($_POST['populares'])){
     $post = executarSelect($con, "SELECT * FROM Postagem WHERE idComunidade={$_SESSION['comID']} ORDER BY feedback DESC");
